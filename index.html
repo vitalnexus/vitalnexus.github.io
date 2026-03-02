@@ -1,23 +1,843 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VitalNexus — IT Support &amp; Services</title>
+  <meta name="description" content="ITSaS — Information Technology Support and Services. Internet Services, I.T. Operations, and I.T. Support." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & base ───────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:         #06080f;
+      --surface:    #0c0f1c;
+      --surface2:   #111528;
+      --border:     #1a2035;
+      --accent:     #1d6ff5;
+      --accent-dim: #1045a0;
+      --accent-glow:#1d6ff530;
+      --text:       #e2e8f8;
+      --text-muted: #6878a8;
+      --text-dim:   #3a4868;
+      --tag-bg:     #101828;
+      --tag-text:   #7090d0;
+      --green:      #10c479;
+      --radius:     6px;
+      --nav-h:      56px;
+      --max-w:      1100px;
+      --font-head:  'Space Grotesk', sans-serif;
+      --font-mono:  'Space Mono', monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-head);
+      font-size: 16px;
+      line-height: 1.65;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Scrollbar ──────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent-dim); border-radius: 3px; }
+
+    /* ── Marquee hero ───────────────────────────────── */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+      padding: 48px 0 40px;
+      background: linear-gradient(180deg, #060d20 0%, var(--bg) 100%);
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 0%, var(--accent-glow), transparent 70%);
+      pointer-events: none;
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 22s linear infinite;
+      user-select: none;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+    .marquee-item {
+      white-space: nowrap;
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      padding-right: 80px;
+      color: var(--text);
+    }
+    .marquee-item span { color: var(--accent); }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .hero-sub {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 0.78rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+    .hero-sub span { color: var(--accent); }
+
+    /* ── Sticky Nav ─────────────────────────────────── */
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8, 8, 15, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+    }
+    .nav-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+    .nav-logo {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-right: auto;
+      white-space: nowrap;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2px;
+      list-style: none;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .nav-links a {
+      display: block;
+      padding: 6px 12px;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--text-muted);
+      border-radius: var(--radius);
+      transition: color 0.18s, background 0.18s;
+    }
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--text); background: var(--surface2); }
+    .nav-links a.active { color: var(--accent); }
+
+    /* ── Page wrapper ───────────────────────────────── */
+    .page {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 48px;
+      align-items: start;
+    }
+
+    /* ── Section headings ───────────────────────────── */
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .section-desc {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+    }
+
+    /* ── Filter tags row ────────────────────────────── */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    .filter-btn {
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--tag-bg);
+      color: var(--text-muted);
+      font-family: var(--font-head);
+      transition: all 0.15s;
+    }
+    .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+    /* ── Post cards ─────────────────────────────────── */
+    .post-list { display: flex; flex-direction: column; gap: 0; }
+    .post-card {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+      transition: opacity 0.2s;
+    }
+    .post-card:first-child { padding-top: 0; }
+    .post-card.hidden { display: none; }
+    .post-card-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: start;
+    }
+    .post-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+      align-items: center;
+    }
+    .post-tag {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--tag-text);
+      padding: 2px 7px;
+      background: var(--tag-bg);
+      border-radius: 3px;
+      transition: all 0.15s;
+    }
+    .post-tag:hover { color: var(--accent); background: var(--accent-glow); }
+    .post-date {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+      margin-left: auto;
+    }
+    .post-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      line-height: 1.35;
+      margin-bottom: 8px;
+      transition: color 0.15s;
+    }
+    .post-card:hover .post-title { color: var(--accent); }
+    .post-excerpt {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .post-arrow {
+      font-size: 1.2rem;
+      color: var(--text-dim);
+      padding-top: 4px;
+      transition: transform 0.2s, color 0.2s;
+    }
+    .post-card:hover .post-arrow { transform: translateX(4px); color: var(--accent); }
+
+    /* ── Sidebar ────────────────────────────────────── */
+    .sidebar { display: flex; flex-direction: column; gap: 16px; }
+
+    /* ── Hub cards ──────────────────────────────────── */
+    .hub-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .hub-card:hover {
+      border-color: var(--accent-dim);
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+    .hub-card-icon {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+    }
+    .hub-card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .hub-card-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin-bottom: 14px;
+    }
+    .hub-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      padding: 6px 14px;
+      border: 1px solid var(--accent-dim);
+      border-radius: 4px;
+      transition: all 0.18s;
+    }
+    .hub-card-link:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    /* ── Divider ────────────────────────────────────── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 8px 0;
+    }
+
+    /* ── Social strip (sidebar) ─────────────────────── */
+    .social-strip {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 20px;
+    }
+    .social-strip-title {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+      margin-bottom: 12px;
+    }
+    .social-links { display: flex; flex-direction: column; gap: 8px; }
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      transition: all 0.18s;
+    }
+    .social-link:hover { color: var(--text); border-color: var(--accent-dim); background: var(--tag-bg); }
+    .social-link-icon { font-size: 1rem; width: 20px; text-align: center; }
+
+    /* ── Footer ─────────────────────────────────────── */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .footer-byline {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      color: var(--text-dim);
+    }
+    .footer-byline a { color: var(--accent); }
+    .footer-social-links { display: flex; gap: 20px; }
+    .footer-social-links a {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--text-muted);
+      transition: color 0.18s;
+    }
+    .footer-social-links a:hover { color: var(--accent); }
+
+    /* ── "NEW" badge ────────────────────────────────── */
+    .badge-new {
+      display: inline-block;
+      font-size: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green);
+      border: 1px solid var(--green);
+      padding: 1px 5px;
+      border-radius: 3px;
+      vertical-align: middle;
+      margin-left: 4px;
+    }
+
+    /* ── Responsive ─────────────────────────────────── */
+    @media (max-width: 860px) {
+      .page { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+      .hub-card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+    }
+    @media (max-width: 560px) {
+      .nav-logo { display: none; }
+      .nav-links a { padding: 6px 8px; font-size: 0.65rem; }
+      .post-card-inner { grid-template-columns: 1fr; }
+      .post-arrow { display: none; }
+    }
+  </style>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
-  <a href="https://vitalnexus.com">Visit my website here</a>
-<h2>My First JavaScript</h2>
 
-<button type="button"
-onclick="document.getElementById('demo').innerHTML = Date()">
-Click me to display Date and Time.</button>
+  <!-- ── Hero Marquee ──────────────────────────────── -->
+  <header class="hero">
+    <div class="marquee-track" aria-hidden="true">
+      <span class="marquee-item">Vital<span>Nexus</span></span>
+      <span class="marquee-item">IT Support <span>&amp;</span> Services</span>
+      <span class="marquee-item">Vital<span>Nexus</span></span>
+      <span class="marquee-item">IT Support <span>&amp;</span> Services</span>
+      <span class="marquee-item">Vital<span>Nexus</span></span>
+      <span class="marquee-item">IT Support <span>&amp;</span> Services</span>
+      <span class="marquee-item">Vital<span>Nexus</span></span>
+      <span class="marquee-item">IT Support <span>&amp;</span> Services</span>
+    </div>
+    <p class="hero-sub">Internet Services <span>/</span> I.T. Operations <span>/</span> I.T. Support</p>
+  </header>
 
-<p id="demo"></p>
-<nav>
-<a href="/html/">HTML</a> |
-<a href="/css/">CSS</a> |
-<a href="/js/">JavaScript</a> |
-<a href="/jquery/">jQuery</a>
-</nav>
+  <!-- ── Sticky Navigation ─────────────────────────── -->
+  <nav class="site-nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <span class="nav-logo">VITALNEXUS</span>
+      <ul class="nav-links" role="list">
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#internet-services">Internet Services</a></li>
+        <li><a href="#it-operations">I.T. Operations</a></li>
+        <li><a href="#it-support">I.T. Support</a></li>
+        <li><a href="https://vitalnexus.com/captcha-page/" target="_blank" rel="noopener">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
 
-<p><strong>Note:</strong> The nav tag is not supported in Internet Explorer 8 and earlier versions.</p>  
+  <!-- ── Main Page Layout ──────────────────────────── -->
+  <main id="home">
+    <div class="page">
+
+      <!-- ── Services Column ───────────────────────── -->
+      <section>
+        <p class="section-label">// Information Technology Services</p>
+        <h2 class="section-title">Our Services</h2>
+        <p class="section-desc" id="service-count">Showing all services</p>
+
+        <!-- Filter bar -->
+        <div class="filter-bar" role="group" aria-label="Filter services by category">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="internet-services">Internet Services</button>
+          <button class="filter-btn" data-filter="it-operations">I.T. Operations</button>
+          <button class="filter-btn" data-filter="it-support">I.T. Support</button>
+        </div>
+
+        <!-- Service list -->
+        <div class="post-list" id="service-list">
+
+          <!-- Internet Services -->
+          <article class="post-card" data-tags="internet-services" id="internet-services">
+            <a href="https://vitalnexus.com" target="_blank" rel="noopener">
+              <div class="post-card-inner">
+                <div>
+                  <div class="post-meta">
+                    <span class="post-tag">Internet Services</span>
+                  </div>
+                  <h3 class="post-title">Domain Services</h3>
+                  <p class="post-excerpt">We can put your business on the Internet. This begins with the search for and purchase of a domain, linking your business name or brand to your website. Private registration is strongly recommended to hide your personal information from public WHOIS databases.</p>
+                </div>
+                <span class="post-arrow" aria-hidden="true">→</span>
+              </div>
+            </a>
+          </article>
+
+          <article class="post-card" data-tags="internet-services">
+            <a href="https://vitalnexus.com" target="_blank" rel="noopener">
+              <div class="post-card-inner">
+                <div>
+                  <div class="post-meta">
+                    <span class="post-tag">Internet Services</span>
+                  </div>
+                  <h3 class="post-title">Website Hosting</h3>
+                  <p class="post-excerpt">Once your domain is registered and secured, we offer web hosting packages based on your budget, expected traffic, and goals — including dedicated Virtual Private Servers, shared hosting, and managed WordPress hosting with security and automatic updates.</p>
+                </div>
+                <span class="post-arrow" aria-hidden="true">→</span>
+              </div>
+            </a>
+          </article>
+
+          <article class="post-card" data-tags="internet-services">
+            <a href="https://vitalnexus.com" target="_blank" rel="noopener">
+              <div class="post-card-inner">
+                <div>
+                  <div class="post-meta">
+                    <span class="post-tag">Internet Services</span>
+                  </div>
+                  <h3 class="post-title">Website Creation</h3>
+                  <p class="post-excerpt">We build websites that meet your vision and business goals, incorporating your social media presence. We offer lower-cost custom-built WordPress solutions and can hand over content creation to you once complete.</p>
+                </div>
+                <span class="post-arrow" aria-hidden="true">→</span>
+              </div>
+            </a>
+          </article>
+
+          <article class="post-card" data-tags="internet-services">
+            <a href="https://vitalnexus.com" target="_blank" rel="noopener">
+              <div class="post-card-inner">
+                <div>
+                  <div class="post-meta">
+                    <span class="post-tag">Internet Services</span>
+                  </div>
+                  <h3 class="post-title">Sell Products &amp; Services</h3>
+                  <p class="post-excerpt">We build secure online stores with integration for USPS, UPS, FedEx, and payment processors including credit cards, PayPal, and Stripe. WooCommerce solutions available with unlimited products and customizable templates.</p>
+                </div>
+                <span class="post-arrow" aria-hidden="true">→</span>
+              </div>
+            </a>
+          </article>
+
+          <article class="post-card" data-tags="internet-services">
+            <a href="https://vitalnexus.com" target="_blank" rel="noopener">
+              <div class="post-card-inner">
+                <div>
+                  <div class="post-meta">
+                    <span class="post-tag">Internet Services</span>
+                  </div>
+                  <h3 class="post-title">Social Branding / Media</h3>
+                  <p class="post-excerpt">We help establish your brand identity on the Internet and social media, aligning with your business goals and linking your social media presence to redirect visitors to your website.</p>
+                </div>
+                <span class="post-arrow" aria-hidden="true">→</span>
+              </div>
+            </a>
+          </article>
+
+          <!-- I.T. Operations -->
+          <article class="post-card" data-tags="it-operations" id="it-operations">
+            <a href="https://vitalnexus.com" target="_blank" rel="noopener">
+              <div class="post-card-inner">
+                <div>
+                  <div class="post-meta">
+                    <span class="post-tag">I.T. Operations</span>
+                  </div>
+                  <h3 class="post-title">IT Maintenance Contract</h3>
+                  <p class="post-excerpt">All services are performed under a monthly IT Maintenance contract, established after an initial onsite review. Billed on the 15th of each month for the following month's services.</p>
+                </div>
+                <span class="post-arrow" aria-hidden="true">→</span>
+              </div>
+            </a>
+          </article>
+
+          <article class="post-card" data-tags="it-operations">
+            <a href="https://vitalnexus.com" target="_blank" rel="noopener">
+              <div class="post-card-inner">
+                <div>
+                  <div class="post-meta">
+                    <span class="post-tag">I.T. Operations</span>
+                  </div>
+                  <h3 class="post-title">Systems Administration</h3>
+                  <p class="post-excerpt">We handle Windows and Linux server administration onsite or via secured remote access — including complete user administration and self-help systems so you can focus on running your business.</p>
+                </div>
+                <span class="post-arrow" aria-hidden="true">→</span>
+              </div>
+            </a>
+          </article>
+
+          <article class="post-card" data-tags="it-operations">
+            <a href="https://vitalnexus.com" target="_blank" rel="noopener">
+              <div class="post-card-inner">
+                <div>
+                  <div class="post-meta">
+                    <span class="post-tag">I.T. Operations</span>
+                  </div>
+                  <h3 class="post-title">Data Networks</h3>
+                  <p class="post-excerpt">We create high-speed data networks in your home or office, including cabling, certification, and deployment of routers and firewalls. Complete network administration available to keep your network operational and secured.</p>
+                </div>
+                <span class="post-arrow" aria-hidden="true">→</span>
+              </div>
+            </a>
+          </article>
+
+          <article class="post-card" data-tags="it-operations">
+            <a href="https://vitalnexus.com" target="_blank" rel="noopener">
+              <div class="post-card-inner">
+                <div>
+                  <div class="post-meta">
+                    <span class="post-tag">I.T. Operations</span>
+                  </div>
+                  <h3 class="post-title">Secure Wireless</h3>
+                  <p class="post-excerpt">We deploy secured wireless networks in your home or office with device access controls and complete coverage. Avoid the risks of insecure public wireless networks that put your data at risk.</p>
+                </div>
+                <span class="post-arrow" aria-hidden="true">→</span>
+              </div>
+            </a>
+          </article>
+
+          <article class="post-card" data-tags="it-operations">
+            <a href="https://vitalnexus.com" target="_blank" rel="noopener">
+              <div class="post-card-inner">
+                <div>
+                  <div class="post-meta">
+                    <span class="post-tag">I.T. Operations</span>
+                  </div>
+                  <h3 class="post-title">Virtualization Services</h3>
+                  <p class="post-excerpt">We assist with Amazon, Google, and Microsoft cloud and virtualization services for businesses that want to outsource applications and data rather than maintain hardware onsite.</p>
+                </div>
+                <span class="post-arrow" aria-hidden="true">→</span>
+              </div>
+            </a>
+          </article>
+
+          <article class="post-card" data-tags="it-operations">
+            <a href="https://vitalnexus.com" target="_blank" rel="noopener">
+              <div class="post-card-inner">
+                <div>
+                  <div class="post-meta">
+                    <span class="post-tag">I.T. Operations</span>
+                  </div>
+                  <h3 class="post-title">Data Management</h3>
+                  <p class="post-excerpt">SQL database administration, upgrade, and maintenance. We offer backup and recovery services for your databases and critical business data files.</p>
+                </div>
+                <span class="post-arrow" aria-hidden="true">→</span>
+              </div>
+            </a>
+          </article>
+
+          <!-- I.T. Support -->
+          <article class="post-card" data-tags="it-support" id="it-support">
+            <a href="https://vitalnexus.com" target="_blank" rel="noopener">
+              <div class="post-card-inner">
+                <div>
+                  <div class="post-meta">
+                    <span class="post-tag">I.T. Support</span>
+                  </div>
+                  <h3 class="post-title">Service Level Agreement (SLA)</h3>
+                  <p class="post-excerpt">All support is provided under an SLA contract where you define the services, conditions, and frequency. Work is invoiced weekly at a negotiated hourly rate with payment due within 7 calendar days.</p>
+                </div>
+                <span class="post-arrow" aria-hidden="true">→</span>
+              </div>
+            </a>
+          </article>
+
+          <article class="post-card" data-tags="it-support">
+            <a href="https://vitalnexus.com" target="_blank" rel="noopener">
+              <div class="post-card-inner">
+                <div>
+                  <div class="post-meta">
+                    <span class="post-tag">I.T. Support</span>
+                  </div>
+                  <h3 class="post-title">Asset Management</h3>
+                  <p class="post-excerpt">Serialization and control of all company technology assets and software licensing. We inventory devices, track usage, and enforce exit procedures to maintain asset accountability when employees leave.</p>
+                </div>
+                <span class="post-arrow" aria-hidden="true">→</span>
+              </div>
+            </a>
+          </article>
+
+          <article class="post-card" data-tags="it-support">
+            <a href="https://vitalnexus.com" target="_blank" rel="noopener">
+              <div class="post-card-inner">
+                <div>
+                  <div class="post-meta">
+                    <span class="post-tag">I.T. Support</span>
+                  </div>
+                  <h3 class="post-title">User Administration</h3>
+                  <p class="post-excerpt">Beyond creating user accounts, we train employees on basic security, implement best practices, and integrate with HR procedures to keep your data and network safe from unauthorized access.</p>
+                </div>
+                <span class="post-arrow" aria-hidden="true">→</span>
+              </div>
+            </a>
+          </article>
+
+          <article class="post-card" data-tags="it-support">
+            <a href="https://vitalnexus.com" target="_blank" rel="noopener">
+              <div class="post-card-inner">
+                <div>
+                  <div class="post-meta">
+                    <span class="post-tag">I.T. Support</span>
+                  </div>
+                  <h3 class="post-title">Help Desk &amp; Virus Protection</h3>
+                  <p class="post-excerpt">Onsite desk-side support with a full ticketing system for complete visibility into services rendered. We manage anti-virus programs with cloud-based protection for email, web, identity theft, and real-time threat notifications.</p>
+                </div>
+                <span class="post-arrow" aria-hidden="true">→</span>
+              </div>
+            </a>
+          </article>
+
+          <article class="post-card" data-tags="it-support">
+            <a href="https://vitalnexus.com" target="_blank" rel="noopener">
+              <div class="post-card-inner">
+                <div>
+                  <div class="post-meta">
+                    <span class="post-tag">I.T. Support</span>
+                  </div>
+                  <h3 class="post-title">Remote Assistance</h3>
+                  <p class="post-excerpt">When onsite visits are not needed or possible, we offer remote assistance via secure connection, or phone support for step-by-step guidance when remote connectivity is unavailable.</p>
+                </div>
+                <span class="post-arrow" aria-hidden="true">→</span>
+              </div>
+            </a>
+          </article>
+
+          <article class="post-card" data-tags="it-support">
+            <a href="https://vitalnexus.com" target="_blank" rel="noopener">
+              <div class="post-card-inner">
+                <div>
+                  <div class="post-meta">
+                    <span class="post-tag">I.T. Support</span>
+                  </div>
+                  <h3 class="post-title">Cloud Applications</h3>
+                  <p class="post-excerpt">User training and application support for all mission-critical software — whether installed on your local server or hosted in the cloud — including full deployment assistance and ongoing support.</p>
+                </div>
+                <span class="post-arrow" aria-hidden="true">→</span>
+              </div>
+            </a>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ── Sidebar ────────────────────────────────── -->
+      <aside class="sidebar">
+
+        <!-- CTA card -->
+        <div class="hub-card" style="border-color: var(--accent-dim); background: linear-gradient(135deg, var(--surface) 0%, #0a1530 100%);">
+          <div class="hub-card-icon">🚀</div>
+          <h3 class="hub-card-title">I Need Services Now!</h3>
+          <p class="hub-card-desc">Ready to get started? Submit a request and our team will be in touch promptly.</p>
+          <a href="https://vitalnexus.com/captcha-page/" target="_blank" rel="noopener" class="hub-card-link" style="background: var(--accent); color:#fff; border-color: var(--accent);">Get in touch →</a>
+        </div>
+
+        <div class="hub-card-grid">
+          <div class="hub-card">
+            <div class="hub-card-icon">🌐</div>
+            <h3 class="hub-card-title">Internet Services</h3>
+            <p class="hub-card-desc">Domain registration, SSL, website hosting, creation, and e-commerce solutions.</p>
+            <a href="#internet-services" class="hub-card-link">Learn more →</a>
+          </div>
+
+          <div class="hub-card">
+            <div class="hub-card-icon">🖥️</div>
+            <h3 class="hub-card-title">I.T. Operations</h3>
+            <p class="hub-card-desc">Server admin, networking, virtualization, cloud services, and data management.</p>
+            <a href="#it-operations" class="hub-card-link">Learn more →</a>
+          </div>
+
+          <div class="hub-card">
+            <div class="hub-card-icon">🛡️</div>
+            <h3 class="hub-card-title">I.T. Support</h3>
+            <p class="hub-card-desc">Help desk, virus protection, remote assistance, and asset management under SLA.</p>
+            <a href="#it-support" class="hub-card-link">Learn more →</a>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="social-strip">
+          <p class="social-strip-title">// About ITSaS</p>
+          <div class="social-links">
+            <a href="https://vitalnexus.com" class="social-link" target="_blank" rel="noopener">
+              <span class="social-link-icon">🔗</span> vitalnexus.com
+            </a>
+            <a href="https://vitalnexus.com/captcha-page/" class="social-link" target="_blank" rel="noopener">
+              <span class="social-link-icon">✉️</span> Contact Us
+            </a>
+          </div>
+        </div>
+
+      </aside>
+
+    </div><!-- .page -->
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer>
+    <div class="site-footer">
+      <p class="footer-byline">VITALNEXUS &middot; ITSaS &middot; Information Technology Support &amp; Services</p>
+      <nav class="footer-social-links" aria-label="Quick links">
+        <a href="#internet-services">Internet Services</a>
+        <a href="#it-operations">I.T. Operations</a>
+        <a href="#it-support">I.T. Support</a>
+        <a href="https://vitalnexus.com/captcha-page/" target="_blank" rel="noopener">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- ── Filter JS ──────────────────────────────────── -->
+  <script>
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const services = document.querySelectorAll('.post-card');
+    const countEl = document.getElementById('service-count');
+
+    function updateCount(visible) {
+      const total = services.length;
+      countEl.textContent = visible === total
+        ? `Showing all ${total} services`
+        : `Showing ${visible} of ${total} services`;
+    }
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.dataset.filter;
+        let visible = 0;
+
+        services.forEach(card => {
+          const tags = card.dataset.tags || '';
+          const show = filter === 'all' || tags.includes(filter);
+          card.classList.toggle('hidden', !show);
+          if (show) visible++;
+        });
+
+        updateCount(visible);
+      });
+    });
+
+    // Smooth scroll for anchor nav links
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', e => {
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    updateCount(services.length);
+  </script>
+
 </body>
 </html>
