@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="VitalNexus Privacy Policy — how we collect, use, and protect your personal information." />
+  <title>Privacy Policy — VitalNexus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:         #060d07;
+      --surface:    #0a120b;
+      --surface2:   #0f1910;
+      --border:     #1a2e1b;
+      --accent:     #196923;
+      --accent-dim: #0e4016;
+      --accent-glow:#19692330;
+      --text:       #e2ede3;
+      --text-muted: #6a8a6c;
+      --text-dim:   #3a5a3c;
+      --tag-bg:     #0d180e;
+      --tag-text:   #D7A537;
+      --green:      #27c44a;
+      --radius:     6px;
+      --nav-h:      56px;
+      --max-w:      1100px;
+      --font-head:  'Space Grotesk', sans-serif;
+      --font-mono:  'Space Mono', monospace;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-head);
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    main { flex: 1; }
+
+    /* ── Nav ───────────────────────────────────────── */
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      height: auto;
+      min-height: var(--nav-h);
+    }
+    .nav-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      min-height: var(--nav-h);
+    }
+    .nav-logo {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .nav-links { display: flex; gap: 4px; margin-left: auto; }
+    .nav-links a {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #D7A537;
+      padding: 6px 12px;
+      border-radius: var(--radius);
+      transition: all 0.18s;
+    }
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--text); background: var(--surface2); }
+    .nav-links a.active { color: #D7A537; }
+
+    /* ── Hamburger button ───────────────────────────── */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 6px 10px;
+      color: #D7A537;
+      font-size: 1.15rem;
+      line-height: 1;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: border-color 0.18s, background 0.18s;
+    }
+    .nav-toggle:hover { border-color: #D7A537; background: var(--surface2); }
+    .nav-toggle[aria-expanded="true"] { background: var(--surface2); border-color: #D7A537; }
+
+    /* ── Page wrapper ───────────────────────────────── */
+    .page {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    /* ── Page hero ──────────────────────────────────── */
+    .page-hero { display: flex; flex-direction: column; gap: 10px; }
+    .page-hero-breadcrumb {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    .page-hero-breadcrumb a { color: var(--accent); transition: color 0.15s; }
+    .page-hero-breadcrumb a:hover { color: var(--text); }
+    .page-hero-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .page-hero-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .page-hero-title .hero-icon { font-size: 1.8rem; }
+    .page-hero-desc {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 680px;
+      line-height: 1.7;
+    }
+
+    /* ── Divider ────────────────────────────────────── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+
+    /* ── Privacy content ────────────────────────────── */
+    .privacy-content {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .privacy-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 30px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .privacy-section:hover {
+      border-color: var(--accent-dim);
+      box-shadow: 0 0 24px var(--accent-glow);
+    }
+
+    .privacy-section-label {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--tag-text);
+      padding: 2px 7px;
+      background: var(--tag-bg);
+      border-radius: 3px;
+      width: fit-content;
+    }
+
+    .privacy-section h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    .privacy-section h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 10px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .privacy-section p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+
+    .privacy-section a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.15s;
+    }
+    .privacy-section a:hover { color: var(--green); }
+
+    .privacy-section ul.privacy-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding-left: 0;
+    }
+    .privacy-section ul.privacy-list li {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      padding-left: 18px;
+      position: relative;
+    }
+    .privacy-section ul.privacy-list li::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* ── Last updated badge ─────────────────────────── */
+    .last-updated {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 5px 12px;
+      width: fit-content;
+    }
+
+    /* ── Footer ─────────────────────────────────────── */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .footer-byline {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      color: var(--text-dim);
+    }
+    .footer-social-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-social-links a {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--text-muted);
+      transition: color 0.18s;
+    }
+    .footer-social-links a:hover { color: var(--accent); }
+
+    /* ── Responsive ─────────────────────────────────── */
+    @media (max-width: 700px) {
+      .nav-toggle { display: block; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: var(--nav-h);
+        left: 0;
+        right: 0;
+        background: var(--bg);
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        padding: 10px 16px 16px;
+        gap: 2px;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 10px 14px; }
+      .page { padding: 32px 16px 60px; }
+      .page-hero-title { font-size: 1.5rem; }
+      .privacy-section { padding: 22px 18px; }
+      .site-footer { flex-direction: column; align-items: flex-start; padding: 20px 14px; gap: 14px; }
+      .footer-social-links { gap: 12px; }
+    }
+
+    @media (max-width: 380px) {
+      .nav-logo { font-size: 0.78rem; }
+      .page-hero-title { font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ───────────────────────────────── -->
+  <nav class="site-nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">VITALNEXUS</a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+      <ul class="nav-links" id="nav-links" role="list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="internet-services.html">Internet Services</a></li>
+        <li><a href="it-operations.html">I.T. Operations</a></li>
+        <li><a href="it-support.html">I.T. Support</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <div class="page">
+
+      <!-- ── Hero ─────────────────────────────────── -->
+      <div class="page-hero">
+        <p class="page-hero-breadcrumb"><a href="index.html">Home</a> &rsaquo; Privacy Policy</p>
+        <p class="page-hero-label">// ITSaS &mdash; Information Technology Services</p>
+        <h1 class="page-hero-title">
+          <span class="hero-icon">🔒</span> Privacy Policy
+        </h1>
+        <p class="page-hero-desc">How VitalNexus collects, uses, and protects personal information gathered through this website.</p>
+        <span class="last-updated">Last updated &mdash; June 27, 2023</span>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- ── Privacy Content ──────────────────────── -->
+      <div class="privacy-content">
+
+        <!-- Who we are -->
+        <div class="privacy-section">
+          <span class="privacy-section-label">Overview</span>
+          <h2>Who We Are</h2>
+          <p>This website is owned and operated by S. Harshberger's Information Technology Services and Support. Our website address is <a href="https://vitalnexus.com" target="_blank" rel="noopener noreferrer">https://vitalnexus.com</a>. Both of these entities are collectively referred to as ("We", "we", "us", "Our", "our", "Site") throughout this website. This Site's purpose is to provide and/or advertise the services offered here, so please read this policy to understand that your use of this website constitutes acceptance of this privacy policy.</p>
+        </div>
+
+        <!-- What is personal information -->
+        <div class="privacy-section">
+          <span class="privacy-section-label">Definitions</span>
+          <h2>What Is Personal Information?</h2>
+          <p>Personal information is data as defined by our Site, is created by a visitor's or user's interactions while using this Site. Limited personal data such as your IP address is also generated from technical processes such as cookies, analytics, and third party embeds on this website.</p>
+        </div>
+
+        <!-- Contact Us -->
+        <div class="privacy-section">
+          <span class="privacy-section-label">Contact</span>
+          <h2>Contact Us for Privacy Concerns or to Exercise Your Privacy Rights</h2>
+          <p>To contact us, to exercise your rights, to get your personal data exported, or to have your personal data erased (to the limit that we can allow) or for any other privacy-specific concerns, please clearly indicate your request and send it by email to our Privacy Compliance person at <strong>info [at] vitalnexus [dot] com</strong>.</p>
+          <p>If you write to this Site requesting any of the actions listed above, we will respond to your request, but we may need to verify your identity and/or validate any authorized agent in order to complete your request(s) for action. We will act on your request within a reasonable amount of time. This is also dependent on the time required to verify you and/or your agent's identity, authority to act, and what actions are requested, and whether or not you and/or your agent replies to our inquiries in the requested format and manner defined.</p>
+          <p>We do not discriminate against you based on you exercising your privacy rights.</p>
+        </div>
+
+        <!-- What personal data we collect -->
+        <div class="privacy-section">
+          <span class="privacy-section-label">Data Collection</span>
+          <h2>What Personal Data We Collect and Why We Collect It</h2>
+          <p>When you visit our Site, at the bottom of the main page (in the page footer), you are presented with an information banner. You are asked to accept (or reject) our privacy policy, and select your cookie preferences. Through these actions, you agree to this Site's Privacy Policy.</p>
+          <p>We value your privacy, and will responsibly store and maintain data we acquire from the use of this Site. The purpose of this Site is to provide you information that you requested about our Information Technology services and/or support as listed and provided through this Site. We do not plan to collect your data or information for any other purpose than to achieve that goal.</p>
+          <p>To track the effectiveness and traffic of our Site, we use Google Analytics. It is used to collect statistics about each visitor to this Site, to determine how to best provide our services to customers and to provide the best overall experience to visitors using our Site.</p>
+          <p>This website allows the collection and storage of the following information using plugins IF you are granted access to register an account on this Site:</p>
+          <ul class="privacy-list">
+            <li>Your email address* (* — is the primary means of identification and is required information)</li>
+            <li>Your first and last name (optional; last name is NOT recommended)</li>
+            <li>Your username* (which cannot be changed after it is created)</li>
+            <li>Your account nickname (how you choose to display your name on our Site)*</li>
+            <li>Your biographical information (optional, entered via text box)</li>
+            <li>Your website URL (optional)</li>
+          </ul>
+          <p>We do not store credit card information on this Site. Nothing is sold using payment processing through this website. If services and/or support is provided as a result of this Site, payment will be accepted in person or through an agreed upon payment method that is independent of this website.</p>
+        </div>
+
+        <!-- Website Comments -->
+        <div class="privacy-section">
+          <span class="privacy-section-label">Comments</span>
+          <h2>Website Comments</h2>
+          <p>Website comments are currently disabled and not accessible. Please note that if available, AND you choose to post any comments, you must first register your email address on this website. When visitors leave comments on the site we collect the data shown in the comments form, and also the visitor's IP address and browser user agent string to help spam detection.</p>
+          <p><strong>Retention of comments.</strong> If you were able to leave a comment, unless requested otherwise, the comment and its metadata are retained indefinitely. This is so we can recognize and approve any follow-up comments automatically instead of holding them in a moderation queue.</p>
+          <p>We reserve the right to delete, or otherwise moderate any comments (including the right to turn off) comments for any page or post made on our website at any time.</p>
+        </div>
+
+        <!-- Website Media -->
+        <div class="privacy-section">
+          <span class="privacy-section-label">Media</span>
+          <h2>Website Media (Podcasts, Images, Videos)</h2>
+          <p>Please use caution and set safe volume levels with audio broadcasts. If you listen to a podcast on this website, you are responsible for setting the volume at an acceptable hearing level to your preference through the use of the audio controls on the Site, and through your own devices that are used to provide sound/audio.</p>
+          <p>There is currently NO ability for visitors or registered users to upload images or videos to this website at this time.</p>
+          <p><strong>Courtesy Privacy Notice:</strong> Please note that if you could upload images to this website (or any site on the Internet), you should AVOID uploading images with embedded location data (EXIF GPS) included. Malicious actors/criminals could attempt to examine, extract, and download data from those images to gain information about the location where that image or video was recorded.</p>
+          <p>This privacy policy will be updated to indicate the process and accepted types and format of video or images that will be allowed in the future.</p>
+        </div>
+
+        <!-- Website Form Data -->
+        <div class="privacy-section">
+          <span class="privacy-section-label">Forms</span>
+          <h2>Website Form Data</h2>
+          <p>If you choose to contact this Site through our contact form, or if authorized to create an account using your email address, you must complete our registration process which is done with the use of a contact form plugin. The contact form submissions remain until you request removal or for one year after your last activity, for customer service purposes only. This Site does not use the information submitted through the contact form(s) or registration process for any marketing purposes with anyone not associated with this Site.</p>
+          <p>Some or all of the information you enter or provide through our contact form, by email or in person may be placed in a Customer Profile folder and secured and stored offline, for privacy and protection of our customer's data and information.</p>
+          <p>You can request that we destroy, or erase any personal data we hold about you in your Customer Profile. This does not include any data we are obliged to keep for administrative, legal, or security purposes.</p>
+        </div>
+
+        <!-- Cookies -->
+        <div class="privacy-section">
+          <span class="privacy-section-label">Cookies</span>
+          <h2>Cookies Explained</h2>
+          <p>If you visit our Site, cookies will be created that includes information about your browser, region, device information and other data used to customize the way this website provides information to you. Cookies also are created to allow you to personalize your experience on this website, which could include your IP address, service provider, email address, and the pages visited on this website.</p>
+
+          <h3>Retention of Cookies</h3>
+          <p>If authorized to register an account on this Site, when you log in, this website may set up several cookies to save your login information and your screen display choices. If you log out of your account, the login cookies will be removed. If you submit a contact form, additional cookies will be created.</p>
+
+          <h3>How to Manage Your Cookies</h3>
+          <p>Cookies are managed through the use of a pop-up on this Site. If you have an account and you log in to this Site, you have the option to accept or reject the ability to manage two of the three types of cookies on this Site.</p>
+
+          <h3>Essential Cookies (not optional, always stored)</h3>
+          <p>Some cookies are necessary for the operation of this Site, and you cannot avoid the use of those cookies if you visit pages on this website. These cookies are labeled "Essential cookies".</p>
+
+          <h3>Manageable Cookies</h3>
+          <p>Other than Essential Cookies, all other types of cookies can be either accepted or rejected. If you visited the main page of this Site, you should have interacted with the Cookies banner, which provides you the ability to accept or reject cookies on this website. To access your cookie preferences, look for the link at the bottom of any page on this Site.</p>
+        </div>
+
+        <!-- Log Files -->
+        <div class="privacy-section">
+          <span class="privacy-section-label">Log Files</span>
+          <h2>Log Files</h2>
+          <p>Log files track actions occurring on the Site, and collect data including your IP address, browser type, Internet service provider, referring/exit pages, and date/time stamps.</p>
+        </div>
+
+        <!-- Web Beacons -->
+        <div class="privacy-section">
+          <span class="privacy-section-label">Tracking</span>
+          <h2>Web Beacons, Tags, and Categories</h2>
+          <p>These are electronic files used to record information about how you browse the Site. Additionally, when you click an external link through the Site, you are redirected to another site (usually in a new browser tab). These are provided for convenience and access to external links, but is considered part of the functionality on this website.</p>
+        </div>
+
+        <!-- Embedded content -->
+        <div class="privacy-section">
+          <span class="privacy-section-label">Embedded Content</span>
+          <h2>Embedded Content from Other Websites</h2>
+          <p>Pages or posts on this site may include embedded content (e.g. videos, images, logos, etc.). Some of the embedded content from other websites allows the visitor to easily access the related website where this media was created or obtained. Links from or to this media is not to be considered an endorsement for this Site and is not meant to infringe upon any copyrighted use of that media, as it is added for the purpose of commentary, news reporting, or for education.</p>
+          <p>If you access any of this content, these websites may collect data about you, use cookies, embed additional third-party tracking, and monitor your interaction with that embedded content, including tracking your interaction with the embedded content if you have an account and are logged in to that website.</p>
+        </div>
+
+        <!-- Analytics -->
+        <div class="privacy-section">
+          <span class="privacy-section-label">Analytics</span>
+          <h2>Analytics</h2>
+          <p>We use Google Analytics to collect statistics about each visitor to this website, to determine how to best provide our services to customers and to provide the best overall experience to visitors using our site. The information we collect includes:</p>
+          <ul class="privacy-list">
+            <li>What geographic region you are located in</li>
+            <li>What method you used to view or browse this website</li>
+            <li>How you found our website, and the date and time you visited</li>
+            <li>What pages were viewed and/or actions you performed while on this website</li>
+          </ul>
+          <p>You can opt-out of Google Analytics here: <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">https://tools.google.com/dlpage/gaoptout</a>. We may also share your Personal Information to comply with applicable laws and regulations, to respond to a subpoena, search warrant or other lawful request for information we receive, or to otherwise protect our rights.</p>
+        </div>
+
+        <!-- Who we share data with -->
+        <div class="privacy-section">
+          <span class="privacy-section-label">Data Sharing</span>
+          <h2>Who We Share Your Data With</h2>
+          <p>This Site does not sell or share your personal information for any financial gain or revenue. This Site does not knowingly expose any of your personal information to other visitors. However, to enable connectivity and functionality, this Site does have hypertext links to other third party sites.</p>
+          <p>The third party sites that are linked or connected with this Site are:</p>
+          <ul class="privacy-list">
+            <li><strong>Google Analytics</strong> — we share information listed in the Analytics section to track website statistics</li>
+            <li><strong>Google Drive</strong> (Sheets, Documents, etc.) — to share information using these Google products on this Site</li>
+            <li><strong>Google Calendar</strong> — to provide events and information on a shared calendar on this Site</li>
+            <li><strong>Automattic</strong> — information is processed and/or functionality is provided through various add-ons, plug-ins and/or themes</li>
+            <li><strong>GoDaddy</strong> — to offer website hosting, domain services, and build services using their products</li>
+          </ul>
+          <p>You are encouraged to review the privacy policy for each third party. These are external links that each open in a new browser tab:</p>
+          <ul class="privacy-list">
+            <li><a href="https://policies.google.com/privacy?hl=en" target="_blank" rel="noopener noreferrer">Google Privacy Policy</a></li>
+            <li><a href="https://automattic.com/privacy/" target="_blank" rel="noopener noreferrer">Automattic Privacy Policy</a></li>
+            <li><a href="https://www.godaddy.com/agreements/privacy" target="_blank" rel="noopener noreferrer">GoDaddy Privacy Policy</a></li>
+          </ul>
+        </div>
+
+        <!-- Social Media -->
+        <div class="privacy-section">
+          <span class="privacy-section-label">Social Media</span>
+          <h2>Social Media Links / Connections</h2>
+          <p>This Site uses social media accounts connected for purposes of providing visitors on this site to view, comment, or interact with using those websites. If you have accounts on these websites, you must have accepted their terms of service and privacy policies. The social media sites which this Site uses and may be linked on this website are:</p>
+          <ul class="privacy-list">
+            <li><strong>YouTube</strong> (owned by Google) — this Site links or embeds videos created by this Site</li>
+            <li><strong>Twitter / X</strong> (owned by X Corp) — this Site tweets to followers and provides a technology feed on this website</li>
+            <li><strong>LinkedIn</strong> (owned by Microsoft) — used to connect a LinkedIn profile with this Site</li>
+            <li><strong>Instagram</strong> (owned by Meta) — used to link photos and other media with this Site</li>
+            <li><strong>Facebook</strong> (owned by Meta) — used to connect a Facebook page and one or more user accounts with this Site</li>
+          </ul>
+        </div>
+
+        <!-- Data Retention -->
+        <div class="privacy-section">
+          <span class="privacy-section-label">Retention</span>
+          <h2>How Long We Retain Your Data</h2>
+          <p><strong>User Profile / Comments.</strong> For users that are authorized to register on this website, the Site will store the personal information that user provides in their user profile. Please note that when entered, a user cannot change their username. Site administrators can see that information. Since comments are currently disabled, no one can comment on this Site. If it was enabled, whenever a registered user leaves a comment, the comment and its metadata are retained indefinitely so the Site can recognize and approve any follow-up comments automatically instead of holding them in a moderation queue.</p>
+        </div>
+
+        <!-- Where we send data -->
+        <div class="privacy-section">
+          <span class="privacy-section-label">Data Transfer</span>
+          <h2>Where We Send Your Data</h2>
+          <p>If you use this Site, clicking links or interactions made through this site may be checked through an automated spam prevention/detection service and may link to other third parties that you used to create a user profile on that website.</p>
+          <p>If you are a resident of the European Union, in accordance with the General Data Protection Regulation (GDPR), please note that your information may or may not be transferred outside of Europe, to the United States. This is according to external links and those entities that are responsible for that data transfer, and is out of the control of this Site.</p>
+        </div>
+
+        <!-- Additional Information -->
+        <div class="privacy-section">
+          <span class="privacy-section-label">Additional Info</span>
+          <h2>Additional Information</h2>
+
+          <h3>Do Not Track</h3>
+          <p>Please note that we do not alter our Site's data collection and use practices when we see a Do Not Track signal from your browser. If you do not want this to occur, you can opt-out of Google Analytics here: <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">https://tools.google.com/dlpage/gaoptout</a>.</p>
+
+          <h3>Disclosure</h3>
+          <p>We may disclose your personal information if we are required by law to do so or if you violate our Terms of Service and only in that case when necessary to resolve the situation.</p>
+
+          <h3>How We Protect Your Data</h3>
+          <p>For your protection, our Site uses a Secure Socket Layer ('SSL') certificate which certifies the identity of this website. You can check the validity of this Site's SSL certificate by clicking on the lock icon located to the left of our URL in the browser search bar. Please note that deleting or removing cookies and/or site data may affect the function and experience of this Site.</p>
+          <p>To minimize the risk to your personal information regarding purchases, this website does not store any credit card numbers or purchase details on this Site. This Site limits the access to the customer information and user profile information stored on this site to only those personnel that are screened and whose business role requires access to this information.</p>
+
+          <h3>What Data Breach Procedures We Have in Place</h3>
+          <p>This Site has implemented a plan that includes procedures to be done in the worst case scenario of a data breach. We also take industry standard precautions such as backups of data, enhanced security measures, etc. In the event of a data breach, when we are aware of the breach we will immediately restrict access to include the shutdown of this Site if necessary to protect the data and terminate the breach.</p>
+          <p>If you suspect your data has been exposed, please contact us immediately at <strong>info [at] vitalnexus [dot] com</strong>.</p>
+
+          <h3>What Third Parties We Receive Data From</h3>
+          <p><strong>Google.</strong> This Site is a Veteran Led business and has a business profile created on Google, which includes a Google Maps listing. If you use Google Maps, or Google Search, this Site may receive information about your use of these two products, and therefore may appear in our Google Analytics information and data.</p>
+          <p><strong>GoDaddy.</strong> This Site also uses GoDaddy for many services which may refer you to this Site through the GoDaddy website and its affiliates.</p>
+
+          <h3>Automated Decision Making and Profiling</h3>
+          <p>This Site does not currently use either of these technologies. If this status changes, this Site will post here and highlight those changes and will notify users by email.</p>
+        </div>
+
+        <!-- California -->
+        <div class="privacy-section">
+          <span class="privacy-section-label">California Residents</span>
+          <h2>Privacy Information Specific to California Residents</h2>
+          <p>Source: <a href="https://oag.ca.gov/privacy/ccpa" target="_blank" rel="noopener noreferrer">https://oag.ca.gov/privacy/ccpa</a>. The California Consumer Privacy Act of 2018 (CCPA) gives visitors to this Site control over the personal information that businesses collect about them. These rights include:</p>
+          <ul class="privacy-list">
+            <li>The right to know about the personal information a business collects about them and how it is used and shared</li>
+            <li>The right to delete personal information collected from them (with some exceptions)</li>
+            <li>The right to opt-out of the sale or sharing of their personal information</li>
+            <li>The right to non-discrimination for exercising their CCPA rights</li>
+          </ul>
+          <p>Additionally, Proposition 24, recognized as the California Privacy Rights Act (CPRA) was approved by votes on November 3, 2020, took effect on December 16, 2020, and the operation of the act became active on January 1, 2023. Enforcement will take place on or after July 1, 2023.</p>
+
+          <h3>How Is a 'Business' Defined by the CCPA / CPRA?</h3>
+          <p>The CCPA, as amended by the CPRA, defines a "business" as a for-profit legal entity that collects consumers' personal information, determines the purposes and means of the processing, "does business" in California, and satisfies at least one of the following thresholds:</p>
+          <ul class="privacy-list">
+            <li>Has annual gross revenues in excess of $25 million</li>
+            <li>Annually buys, receives, sells, or shares the personal information of 100,000 or more consumers or households</li>
+            <li>Derives 50% or more of its annual revenues from selling consumers' personal information</li>
+          </ul>
+          <p>This Site, based on the definitions in the CPRA and the CCPA, does not meet the requirements of a business that is required to comply with CPRA/CCPA, but acknowledges the importance of consumer privacy and therefore provides this compliance information.</p>
+
+          <h3>Do Not Sell or Share My Personal Information</h3>
+          <p>The right to opt-out of the sale or sharing of personal information as defined in the CCPA is not applicable for this website. However, this Site will make every effort to comply with your requests concerning the private data collected through this Site.</p>
+        </div>
+
+        <!-- EU / GDPR -->
+        <div class="privacy-section">
+          <span class="privacy-section-label">EU / GDPR</span>
+          <h2>Privacy Information Specific to Members of the European Union (EU)</h2>
+          <h3>General Data Protection Regulation (GDPR)</h3>
+          <p>If you are a European resident, you are advised that only Internet Services are available to you, and only that category of services requires compliance under the GDPR. If you are under contract with this Site and are a member of the EU but reside within the United States, you have the right:</p>
+          <ul class="privacy-list">
+            <li>To request access to, deletion of, or correction of your personal data held by this Site</li>
+            <li>To complain to a supervisory authority</li>
+            <li>To be informed of what data processing is taking place</li>
+            <li>To restrict processing</li>
+            <li>To data portability</li>
+            <li>To object to processing of your personal data</li>
+          </ul>
+        </div>
+
+      </div><!-- .privacy-content -->
+
+    </div><!-- .page -->
+  </main>
+
+  <!-- ── Footer ───────────────────────────────────── -->
+  <footer>
+    <div class="site-footer">
+      <p class="footer-byline">VITALNEXUS &middot; ITSaS &middot; Information Technology Support &amp; Services</p>
+      <nav class="footer-social-links" aria-label="Quick links">
+        <a href="index.html">Home</a>
+        <a href="internet-services.html">Internet Services</a>
+        <a href="it-operations.html">I.T. Operations</a>
+        <a href="it-support.html">I.T. Support</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    navToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', isOpen);
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
+
+</body>
+</html>
