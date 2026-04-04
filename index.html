@@ -7,6 +7,8 @@
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: 40px auto; padding: 0 20px; color: #adbac7; background-color: #22272e; }
         .bio { border-bottom: 1px solid #444c56; padding-bottom: 2rem; margin-bottom: 2rem; }
+        .contributions { border-bottom: 1px solid #444c56; padding-bottom: 2rem; margin-bottom: 2rem; }
+        .contributions img { width: 100%; max-width: 760px; border-radius: 6px; border: 1px solid #444c56; }
         h1 { color: #539bf5; margin-bottom: 0.5rem; }
         .repo-card { border: 1px solid #444c56; padding: 1.2rem; margin-bottom: 1rem; border-radius: 6px; background-color: #2d333b; border-left: 4px solid #539bf5; }
         .repo-name { font-weight: 600; color: #539bf5; text-decoration: none; font-size: 1.1rem; }
@@ -21,20 +23,28 @@
         <p>IT Operations & Systems Professional. Specializing in technical infrastructure, automated workflows, and system optimization. This dashboard tracks my latest repository activity and technical projects.</p>
     </section>
 
-    <h2>Recent Activity</h2>
-    <div id="repo-list">Loading activity from GitHub...</div>
+    <section class="contributions">
+        <h2>Public Contributions</h2>
+        <p>My public GitHub contribution activity for the past year.</p>
+        <a href="https://github.com/vitalnexus" target="_blank" rel="noopener noreferrer">
+            <img src="https://github.com/users/vitalnexus/contributions" alt="GitHub contributions graph for vitalnexus">
+        </a>
+    </section>
+
+    <h2>Featured Repositories</h2>
+    <p id="repo-note">Loading pinned repositories from GitHub...</p>
+    <div id="repo-list"></div>
 
     <script>
-        async function fetchRepos() {
+        async function fetchRecentRepos(container) {
             const username = 'vitalnexus';
             try {
                 const response = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=6`);
                 const repos = await response.json();
-                const container = document.getElementById('repo-list');
                 container.innerHTML = '';
 
                 repos.forEach(repo => {
-                    if(repo.name !== 'vitalnexus.github.io') { // Hide this repo from the list
+                    if (repo.name !== 'vitalnexus.github.io') {
                         const card = document.createElement('div');
                         card.className = 'repo-card';
                         card.innerHTML = `
@@ -45,11 +55,51 @@
                         container.appendChild(card);
                     }
                 });
-            } catch (e) {
-                document.getElementById('repo-list').innerHTML = "Unable to sync with GitHub API.";
+            } catch (error) {
+                container.innerHTML = '<p>Unable to load recent repositories right now.</p>';
             }
         }
-        fetchRepos();
+
+        async function fetchPinnedRepos() {
+            const username = 'vitalnexus';
+            const container = document.getElementById('repo-list');
+            const note = document.getElementById('repo-note');
+
+            try {
+                const response = await fetch(`https://gh-pinned-repos.egoist.dev/?username=${username}`);
+                if (!response.ok) {
+                    note.textContent = 'Pinned repositories are unavailable; listing repos with the most recent activity.';
+                    await fetchRecentRepos(container);
+                    return;
+                }
+
+                const pinnedRepos = await response.json();
+                if (!Array.isArray(pinnedRepos) || pinnedRepos.length === 0) {
+                    note.textContent = 'No pinned repositories found; listing repos with the most recent activity.';
+                    await fetchRecentRepos(container);
+                    return;
+                }
+
+                note.textContent = 'Showing pinned repositories from GitHub.';
+                container.innerHTML = '';
+
+                pinnedRepos.slice(0, 6).forEach(repo => {
+                    const card = document.createElement('div');
+                    card.className = 'repo-card';
+                    card.innerHTML = `
+                        <a class="repo-name" href="${repo.link}" target="_blank">${repo.repo}</a>
+                        <p class="repo-desc">${repo.description || 'Pinned repository'}</p>
+                        <span class="date">⭐ ${repo.stars || 0} | Forks: ${repo.forks || 0}</span>
+                    `;
+                    container.appendChild(card);
+                });
+            } catch (error) {
+                note.textContent = 'Unable to access pinned repositories; listing repos with the most recent activity.';
+                await fetchRecentRepos(container);
+            }
+        }
+
+        fetchPinnedRepos();
     </script>
 </body>
 </html>
